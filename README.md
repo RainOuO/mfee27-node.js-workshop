@@ -15,8 +15,8 @@ async await還不怎熟練希望課堂上能詳細解說!
 ## 許願池!><
 
 之前Node.js沒接觸過只有先預習，看些網路文章
-想先預習些express裡的:
-==.post、.get、.put、==patch==
+，想先預習些express裡的:
+**.post**、**.get**、**.put**、**.patch**  
 想自己先串資料庫來練習api部分怎麼運用，
 不太清楚老師打算教我們是串MySQL還是別的，
 之前是用XAMPP裡的Apache裡的Admin node不知怎連MYSQL
