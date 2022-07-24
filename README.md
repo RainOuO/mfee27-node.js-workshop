@@ -19,7 +19,7 @@ async await還不怎熟練希望課堂上能詳細解說!
 **.post**、**.get**、**.put**、**.patch**  
 想自己先串資料庫來練習api部分怎麼運用，
 不太清楚老師打算教我們是串MySQL還是別的，  
-之前是用XAMPP裡的Apache裡的Admin node不知怎連MYSQL  
+之前是用XAMPP裡的Apache裡的MySQL Admin，node不知怎連進MYSQL資料庫內。  
 **希望有相關文章或資源!想先自己練習node串資料庫更改API**
 
 
