@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+// const months = ['March', 'Jan', 'Feb', 'Dec'];
+// console.log(months);
+// const fruit=['banana','apple'];
+// console.log(fruit);
+// let allfruits=[...months,...fruit]
+// // allfruits.sort();
+// let mathh=Math.random(allfruits.length);
+// console.log(allfruits);
+
+// const months = ['March', 'Jan', 'Feb', 'Dec'];
+// const fruit=['banana','apple'];
+// let allfruits=[...months,...fruit]
+
+
+// var rand = Math.floor(Math.random()*allfruits.length);
+// var rValue = allfruits[rand];
+// console.log(rValue)
+
+const months = ['March','Lisa','Alex','Rose' ,'Jan', 'Feb', 'Dec','Jake','COKE','LULU','DB','QAQ'];
+const fruit=['banana','apple','watermelon','papaya','tomato'];
+let allfruits=[...months,...fruit]
+//建立一個新陣列，用於儲存找到的7個隨機數
+var newArr = [];// .push()
+//②for迴圈執行7次
+for(var i=0;i<14;i++){
+  //隨機數
+  var num = Math.random()*allfruits.length;
+  num = Math.floor(num);
+  //把找到陣列元素放入新陣列中 回傳最大整數 
+  newArr.push(allfruits[num]);
+  //把選到的這個從陣列中刪除
+  allfruits.splice(num,1);
+}
+//列印已經找到的陣列元素
+console.log(newArr.sort(function(a,b){
+  return a-b;
+}));
+    </script>
+</body>
+</html>
