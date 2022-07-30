@@ -7,4 +7,4 @@ function sum(n){
 }
 sum(1);
 sum(5);
-sum(15);
+sum(10);
