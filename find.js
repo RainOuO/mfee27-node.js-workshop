@@ -23,12 +23,10 @@ console.log(findLike);
 
 
 function find(ary) {
-  let result = [];
   for (let i = 0; i < ary.length; i++) {
     if (ary[i].age ==24) {
-      result.push(ary[i]);
+    return ary[i];
     }
   }
-  return result;
 }
 console.log(find(ary));
