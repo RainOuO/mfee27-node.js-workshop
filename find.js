@@ -19,7 +19,8 @@
 var findLike = ary.find(function(item, index, array){
   return item.like === '薯條'; 
 });
-console.log(findLike);
+console.log(findLike); //{ name: 'Rose', like: '薯條', age: 24 }
+
 
 
 function find(ary) {
@@ -29,4 +30,4 @@ function find(ary) {
     }
   }
 }
-console.log(find(ary));
+console.log(find(ary)); //{ name: 'Rose', like: '薯條', age: 24 }
