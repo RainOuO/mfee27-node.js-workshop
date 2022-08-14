@@ -9,6 +9,8 @@
   "author": "Rain",
   "license": "ISC",
   "dependencies": {
-    "cowsay": "^1.5.0"
+    "axios": "^0.27.2",
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.19"
   }
 }
