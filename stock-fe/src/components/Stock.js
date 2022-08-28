@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../utils/config';
 
 const Stock = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // CALL API
     let getStock = async () => {
-      let res = await axios.get('http://localhost:3001/api/1.0/stocks');
-      setData(res.data);
+      let response = await axios.get(`${API_URL}/stocks`);
+      setData(response.data);
     };
     getStock();
-  }, [data]);
+  }, []);
 
   return (
     <div>
       {error && <div>{error}</div>}
       <h2 className="ml-7 mt-6 text-xl text-gray-600">股票代碼</h2>
+
       {data.map((stock) => {
         return (
           <div
