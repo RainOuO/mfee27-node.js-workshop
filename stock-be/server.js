@@ -8,37 +8,33 @@ const app = express();
 // 至少在同一個檔案中，可以放到最上方統一管理
 // 目標是: 只需要改一個地方，全部的地方就生效
 // 降低漏改到的風險 -> 降低程式出錯的風險
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || 3002;
 
+// npm i cors
 const cors = require('cors');
+// 使用這個第三方提供的 cors 中間件
+// 來允許跨源存取
+// 預設都是全部開放
 app.use(cors());
-//使用資料庫
-const mysql = require('mysql2');
-let pool = mysql
-  .createPool({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    //限制 pool 連線數的上限
-    connectionLimit: 10,
-  })
-  .promise();
+// 使用情境: 當前後端網址不同時，只想允許自己的前端來跨源存取
+//          就可以利用 origin 這個設定來限制，不然預設是 * (全部)
+// const corsOptions = {
+//   origin: ['http://localhost:3000'],
+// };
+// app.use(cors(corsOptions));
+
+// 使用資料庫
+const pool = require('./utils/db');
 
 // 設定視圖引擎，我們用的是 pug
 // npm i pug
-// app.set('view engine', 'pug');
-// // 告訴 express 視圖在哪裡
-// app.set('views', 'views');
-
-// // 測試 server side render 的寫法
-// app.get('/ssr', (req, res, next) => {
-//   // views/index.pug
-//   res.render('index', {
-//     stocks: ['台積電', '長榮航', '聯發科'],
-//   });
-// });
+// 測試 server side render 的寫法
+app.get('/ssr', (req, res, next) => {
+  // views/index.pug
+  res.render('index', {
+    stocks: ['台積電', '長榮航', '聯發科'],
+  });
+});
 
 // express 是由 middleware 組成的
 // request -> middleware 1 -> middleware 2 -> ... -> reponse
@@ -49,41 +45,28 @@ let pool = mysql
 // - res.xxx 結束這次的旅程 (req-res cycle)
 // pipeline pattern
 
-// 一般的 middleware
-// app.use((req, res, next) => {
-//   console.log('這是中間件 A');
-//   let now = new Date();
-//   console.log(`有人來訪問喔 at ${now.toISOString()}`);
-//   // 一定要寫，讓 express 知道要跳去下一個中間件
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   console.log('這是中間件 C');
-//   // 一定要寫，讓 express 知道要跳去下一個中間件
-//   next();
-// });
-
+let stockRouter = require('./routers/stock');
+app.use(stockRouter);
 // 路由中間件
 // app.[method]
 // method: get, post, delete, put, patch, ...
 // GET /
-// app.get('/', (req, res, next) => {
-//   console.log('這裡是首頁');
-//   res.send('Hello Express');
-// });
-// app.get('/test', (req, res, next) => {
-//   console.log('這裡是 test 1');
-//   res.send('Hello Test 1');
-//   // next();
-// });
-//API
-//列出所有股票代碼 GET /stocks
-app.get('/api/1.0/stocks', async (req, res, next) => {
-  let [data] = await pool.execute('SELECT * FROM stocks');
-  // console.log('result', [data]);
-  res.json(data);
+app.get('/', (req, res, next) => {
+  console.log('這裡是首頁');
+  res.send('Hello Express');
 });
+app.get('/test', (req, res, next) => {
+  console.log('這裡是 test 1');
+  res.send('Hello Test 1');
+  // next();
+});
+
+// API
+// 列出所有股票代碼
+// GET /stocks
+
+// 列出某個股票代碼的所有報價資料
+// GET /stocks/2330?page=1
 
 // app.get('/test', (req, res, next) => {
 //   console.log('這裡是 test 2');
