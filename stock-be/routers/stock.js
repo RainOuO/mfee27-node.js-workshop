@@ -2,7 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../utils/db');
-router.get('/api/1.0/stocks', async (req, res, next) => {
+
+router.get('/', async (req, res, next) => {
   console.log('/api/1.0/stocks');
 
   // 寫法1:
@@ -14,7 +15,7 @@ router.get('/api/1.0/stocks', async (req, res, next) => {
   // console.log('result', data);
   res.json(data);
 });
-router.get('/api/1.0/stocks/:stockId', async (req, res, next) => {
+router.get('/:stockId', async (req, res, next) => {
   const stockId = req.params.stockId;
 
   // 去資料庫撈資料

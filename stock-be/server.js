@@ -3,6 +3,8 @@ const express = require('express');
 require('dotenv').config();
 // 利用 express 這個框架/函式庫 來建立一個 web application
 const app = express();
+//要加上中間件 express認得json
+app.use(express.json());
 
 // 在程式碼中，不要讓某些常數散亂在專案的各處
 // 至少在同一個檔案中，可以放到最上方統一管理
@@ -46,7 +48,12 @@ app.get('/ssr', (req, res, next) => {
 // pipeline pattern
 
 let stockRouter = require('./routers/stock');
-app.use(stockRouter);
+const { json } = require('express');
+app.use('/api/1.0/stocks', stockRouter);
+
+// let authRouter = require('./routers/auth');
+// app.use(authRouter);
+
 // 路由中間件
 // app.[method]
 // method: get, post, delete, put, patch, ...
