@@ -28,16 +28,6 @@ app.use(cors());
 // 使用資料庫
 const pool = require('./utils/db');
 
-// 設定視圖引擎，我們用的是 pug
-// npm i pug
-// 測試 server side render 的寫法
-app.get('/ssr', (req, res, next) => {
-  // views/index.pug
-  res.render('index', {
-    stocks: ['台積電', '長榮航', '聯發科'],
-  });
-});
-
 // express 是由 middleware 組成的
 // request -> middleware 1 -> middleware 2 -> ... -> reponse
 // 中間件的順序很重要!!
@@ -48,11 +38,10 @@ app.get('/ssr', (req, res, next) => {
 // pipeline pattern
 
 let stockRouter = require('./routers/stock');
-const { json } = require('express');
 app.use('/api/1.0/stocks', stockRouter);
 
-// let authRouter = require('./routers/auth');
-// app.use(authRouter);
+let authRouter = require('./routers/auth');
+app.use(authRouter);
 
 // 路由中間件
 // app.[method]
